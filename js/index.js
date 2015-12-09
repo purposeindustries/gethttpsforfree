@@ -405,7 +405,7 @@ function validateCSR(e){
             // build the account registration signature command
             var account_template = document.getElementById("signing_template").cloneNode(true);
             account_template.querySelectorAll("input")[0].value = "" +
-                "PRIV_KEY=./account.key; " +
+                "PRIV_KEY=~/.ssh/letsencrypt-purpose.key; " +
                 "echo -n \"" + ACCOUNT_PUBKEY['protected'] + "." + ACCOUNT_PUBKEY['payload'] + "\" | " +
                 "openssl dgst -sha256 -hex -sign $PRIV_KEY";
             account_template.querySelectorAll("input")[1].id = "account_sig";
@@ -421,7 +421,7 @@ function validateCSR(e){
                 var d_ = d.replace(/\./g, "_");
                 var domain_template = document.getElementById("signing_template").cloneNode(true);
                 domain_template.querySelectorAll("input")[0].value = "" +
-                    "PRIV_KEY=./account.key; " +
+                    "PRIV_KEY=~/.ssh/letsencrypt-purpose.key; " +
                     "echo -n \"" + DOMAINS[d]['request_protected'] + "." + DOMAINS[d]['request_payload'] + "\" | " +
                     "openssl dgst -sha256 -hex -sign $PRIV_KEY";
                 domain_template.querySelectorAll("input")[1].id = "domain_sig_" + d_;
@@ -434,7 +434,7 @@ function validateCSR(e){
             // build the csr registration signature command
             var csr_template = document.getElementById("signing_template").cloneNode(true);
             csr_template.querySelectorAll("input")[0].value = "" +
-                    "PRIV_KEY=./account.key; " +
+                    "PRIV_KEY=~/.ssh/letsencrypt-purpose.key; " +
                     "echo -n \"" + CSR['protected'] + "." + CSR['payload'] + "\" | " +
                     "openssl dgst -sha256 -hex -sign $PRIV_KEY";
             csr_template.querySelectorAll("input")[1].id = "csr_sig";
@@ -556,7 +556,7 @@ function validateInitialSigs(e){
                     // build step 4 commands for this domain
                     var challenge_cmd = document.getElementById("signing_template").cloneNode(true);
                     challenge_cmd.querySelectorAll("input")[0].value = "" +
-                        "PRIV_KEY=./account.key; " +
+                        "PRIV_KEY=~/.ssh/letsencrypt-purpose.key; " +
                         "echo -n \"" + DOMAINS[d]['challenge_protected'] + "." + DOMAINS[d]['challenge_payload'] + "\" | " +
                         "openssl dgst -sha256 -hex -sign $PRIV_KEY";
                     challenge_cmd.querySelectorAll("input")[1].id = "challenge_sig_" + d_;
